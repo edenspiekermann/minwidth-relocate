@@ -1,0 +1,150 @@
+<head>
+  <title>min-widths and relocate elements / media queries for javascript</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    html, body {
+      margin: 0;
+      padding:0
+    }
+    #status {
+      border: 2px solid red;
+      background-color: white;
+      padding-left: 10px;
+      font-weight: bold;
+    }
+    #wrapper {
+      padding: 10px;
+      max-width: 800px;
+    }
+    #content {
+      max-width: 600px;
+      padding-right: 10px;
+    }
+    #sidebar {
+      float: right;
+      max-width: 200px;
+      padding: 80px 10px 10px;
+      background-color: lightblue;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="wrapper">
+    <div id="sidebar"></div>
+    <div id="content">
+      <h1>minwidth.js and relocate.js</h1>
+      <p><em>Media queries for JavaScript</em></p>
+      <div class="movethis">
+        <h2>Current min-width:</h2>
+        <div id="status">
+          <span id="width0" style="color:red;">0</span>
+          <span id="width640">640</span>
+          <span id="width1024">1024</span>
+        </div>
+      </div>
+      <h2>minwidth.js</h2>
+      <p>
+        minwidth.js is a javascript library that helps you create fantastic 
+        mobile first websites. You provide a width at which your functions are
+        called.
+      </p>
+      <p>
+        Several use-cases have occured so many times that it made sense to 
+        sort this problem out properly. One thing that happened to us often when 
+        designing mobile first web-sites is that some elements need to be in a 
+        different place in the DOM on wider screens. Another problem was loading
+        certain scripts only desktop screens.
+      </p>
+      <p>
+        minwidth.js lets you bind to resize events on an advanced level. You 
+        provide a screen width and a callback function which is called whenever
+        this width is crossed. You may provide another function which is called
+        when the window is resized back below that width.
+      </p>
+      <h2>relocate.js</h2>
+      <p>
+        relocate.js lets you move elements in the DOM from their original place
+        to another when you can't do that desktop design with CSS media queries.
+      </p>
+      <p>
+        For example move selected items into the sidebar which are mixed into
+        the regular page on mobile devices. Pass it a width and
+        an Array, a NodeList or a HTMLCollection of HTML elements and a target 
+        element where to relocate the elements to.
+      </p>
+      <div class="movethis">
+        <h3>Demo</h3>
+        <p>
+          Change the browsers width to see changes to the active min-width above.
+        </p>
+      </div>
+    </div>
+    <h2>Usage</h2>
+    <p>
+    Here is the code that is used to move things around on this page:
+    <pre>
+&lt;script type="text/javascript" src="minwidth-relocate.min.js">&lt;/script>
+&lt;script type="text/javascript">
+
+minwidth(
+  1024,
+  function(){
+    document.getElementById("width640").style.color = "";
+    document.getElementById("width1024").style.color = "red";
+  },
+  function(){
+    document.getElementById("width640").style.color = "red";
+    document.getElementById("width1024").style.color = "";
+  }
+);
+
+// Use the relocate function to move things around:
+var elements = document.getElementsByClassName("movethis");
+relocate(480, document.getElementById("sidebar"), elements);
+
+&lt;script>
+    </pre>
+  </div>
+  <script type="text/javascript" src="minwidth-relocate.min.js"></script>
+  <script type="text/javascript">
+    minwidth(
+      600,
+      function(){
+        document.getElementById("width0").style.color = "";
+        document.getElementById("width640").style.color = "red";
+      },
+      function(){
+        document.getElementById("width0").style.color = "red";
+        document.getElementById("width640").style.color = "";
+      }
+    );
+    minwidth(
+      1024,
+      function(){
+        document.getElementById("width640").style.color = "";
+        document.getElementById("width1024").style.color = "red";
+      },
+      function(){
+        document.getElementById("width640").style.color = "red";
+        document.getElementById("width1024").style.color = "";
+      }
+    );
+    minwidth(
+      480,
+      function(){
+          document.getElementById("sidebar").style.display = "block";
+      },
+      function(){
+          document.getElementById("sidebar").style.display = "none";
+      }
+    );
+    // Use the relocate function to move things around:
+    var elements = document.getElementsByClassName("movethis");
+    var sidebar = document.getElementById("sidebar");
+    relocate(480, elements, sidebar);
+  </script>
+  <a href="http://github.com/eikes/minwidth-relocate"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
+</body>
