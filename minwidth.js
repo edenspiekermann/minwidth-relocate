@@ -61,10 +61,18 @@
   }
   
   // This is the function that is exported into the global namespace
+  // The paramaters are:
+  // * the width at which the callbacks are called
+  // * the callback going from below to above the width, this is 
+  //   initially called if the screen width is wider that "width"
+  // * the callback going back from above the width to below it
+  // * if a fourth paramater is passed as "true", the forward callback
+  //   is initally not called, but the backward callback is called
+  //   if the screenwidth is smaller than width.
   win.minwidth = function(width, forwardCallback, backwardCallback) {
     instances.push({
       wdt: width,
-      old: 0,
+      old: arguments[3] ? 1E9 : 0,
       fwd: forwardCallback,
       bck: backwardCallback
     });
