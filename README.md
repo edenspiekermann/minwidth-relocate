@@ -23,4 +23,4 @@ Note: IE8 and less don't have getElementsByClassName, you can use jQuery or this
 
 ## minification
 
-    cat *.js | uglifyjs -nc > minwidth-relocate.min.js
+    rm minwidth-relocate.min.js && cat *.js | uglifyjs -nc > minwidth-relocate.min.js
