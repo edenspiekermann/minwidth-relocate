@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Responsive JavaScript with minwidth.js and relocate.js</title>
+</head>
+</body>
+<div style="max-width:800px">
+<h1>Responsive JavaScript with minwidth.js and relocate.js</h1>
+<p>
+ We have recently started using the mobile first approach in our work. This means using CSS media queries to create responsive layouts and JavaScript to deal with the more complex matter of responsive images. We also frequently noticed cases where we needed javascript functions to be called if the window is wider than a given width, because some things can not be solved with CSS. Being the perfectionists that we are, we wanted this to work when resizing the browser and also to be able to revert the change when the window becomes smaller again. One example is to move certain elements into a sidebar on wider windows or move the navigation from the footer into the header. Another example is asynchronously loading some javascript files in wide windows.
+</p>
+<h3>relocate</h3>
+<p>
+So we came up with this function call:
+</p>
+
+<pre class="prettyprint">
+<code class="language-js">
+  var sidebarElements = document.getElementsByClassName("sidebarEl");
+  var sidebar = document.getElementById("sidebar");
+  // here is the function call:
+  relocate(600, sidebarElements, sidebar);
+</code>
+</pre>
+<p>
+Now the sidebarElements can be mixed into the regular layout of the page on mobile devices and they are automatically relocated into the sidebar on screens wider than 600 pixels.
+</p>
+<figure><img src="relocate.png" alt="Illustration of how HTML elements are relocated on desktop screens"><figcaption>HTML elements can be moved around on the page depending on the width of the screen.</figcaption></figure>
+<p>
+<h3>minwidth</h3>
+<p>
+The relocate function is a special case of a function which is called when the browser window is or becomes wider than a minimum width. This is implemented in the minwidth function.
+</p>
+<p>
+minwidth takes at least two parameters, the first one is the width, the second on is the function which called when the window becomes wider than the given width or if it initially is wider than that. The third parameter is the function is called when the screen becomes smaller than this width again, you can use this to undo the changes from the first function.
+The implementation of relocate looks something like this:
+</p>
+<pre class="prettyprint">
+<code class="language-js">
+  function relocate(width, elements, targetElement) {
+    minwidth(width, moveElementsToTarget, moveElementsBack);
+  }
+</code>
+</pre>
+<p>
+The minwidth function can be used in cases where a script needs to be loaded only on wide screens. Loading a script with the fantastic <a href="https://github.com/ded/script.js">$script.js</a>, which we use to asynchronously load more scripts, looks like this:
+</p>
+
+<pre class="prettyprint">
+<code class="language-js">
+  function loadFacebook() {
+    $script("http//connect.facebook.net/en_US/all.js#xfbml=1");
+  };
+  minwidth(600, loadFacebook);
+</code>
+</pre>
+<p>
+In the rare case, that you need to enhance the mobile experience, but not the desktop version you can pass in a fourth parameter and it will cause the the function to work in desktop-first fashion: It calls the second function if the window is initially smaller than the given width, but nothing if the screen is wider than that:
+</p>
+
+<pre class="prettyprint">
+<code class="language-js">
+  minwidth(480, null, enhanceMobile, true);
+</code>
+</pre>
+
+<p>
+The source code for the <a href="https://github.com/eikes/minwidth-relocate">minwidth and the relocate functions</a> can be found on github.
+</p>
+<h3>
+Notes:
+</h3>
+</p><p>
+1) We decided to implement this without using jQuery or any other library, because we wanted to load those asynchronously later on, but at the same time wanted to relocate the elements in a synchronous script at the bottom of the page to avoid elements visibly jumping around.
+</p><p>
+2) Because getElementsByClassName is not available in some browsers we support, we came up with our own little <a href="https://gist.github.com/2299607">polyfill</a> which combines the <a href="http://ejohn.org/blog/getelementsbyclassname-speed-comparison/">best approaches</a> to this problem. If elements were only retrieved using getElementById, this would not be necessary.
+</p><p>
+3) It's small: minified it's less than a kilobyte, gzipped even less.
+</p>
+
+<link href="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.js"></script>
+<script type="text/javascript">
+  prettyPrint();
+</script>
+</body>
+</html>
