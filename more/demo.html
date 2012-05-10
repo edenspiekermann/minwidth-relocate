@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>relocate.js demo</title>
+    <style>
+      * { 
+        -moz-box-sizing: border-box; 
+        -webkit-box-sizing: border-box; 
+        box-sizing: border-box; 
+      }
+      body{
+        max-width: 960px;
+      }
+      #sidebar div,
+      #main div {
+        background-color: lightblue;
+        margin: 0 10px 10px 0;
+      }
+      #sidebar .sidebarEl, 
+      #main .sidebarEl {
+        background-color: lightpink;
+      }
+      #sidebar {
+        background-color: white;
+        border: 2px dotted black;
+        padding: 10px 0 0 10px;
+      }
+      @media screen and (min-width: 480px) {
+        #main {
+          width: 60%;
+          float: left;
+        }
+        #sidebar {
+          width: 40%;
+          float: left;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>relocate.js demo</h1>
+    <p>resize your browser window to relocate the pink elements</p>
+    <div id="main">
+      <div>
+        Element_1
+      </div>
+      <div class="sidebarEl">
+        Element_2 class="sidebarEl"
+      </div>
+      <div>
+        Element_3
+      </div>
+      <div>
+        Element_4
+      </div>
+      <div class="sidebarEl">
+        Element_5 class="sidebarEl"
+      </div>
+      <div class="sidebarEl">
+        Element_6 class="sidebarEl"
+      </div>
+      <div>
+        Element_7
+      </div>
+      <div>
+        Element_8
+      </div>
+    </div>
+    <div id="sidebar">
+      <div style="background-color:lightgreen">
+        Element_9 
+      </div>
+    </div>
+  </body>
+  <script type="text/javascript" src="../minwidth-relocate.min.js"></script>
+  <script type="text/javascript">
+    // Use the relocate function to move things around:
+    var elements = document.getElementsByClassName("sidebarEl");
+    var sidebar = document.getElementById("sidebar");
+    relocate(480, elements, sidebar);
+  </script>
+</html>
