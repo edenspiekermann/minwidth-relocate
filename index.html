@@ -103,7 +103,8 @@ minwidth(
 
 // Use the relocate function to move things around:
 var elements = document.getElementsByClassName("movethis");
-relocate(480, document.getElementById("sidebar"), elements);
+var sidebar = document.getElementById("sidebar");
+relocate(480, elements, sidebar);
 
 &lt;script>
     </pre>
