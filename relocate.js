@@ -1,7 +1,7 @@
 // Move Elements in the DOM when a certain width is crossed
 relocate = function(width, elements, destinationElement) {
   // ensure that we use an array-like argument, NodeList and HTMLCollection work as well
-  if (elements instanceof Element) elements = [elements];
+  if (elements.nodeName) elements = [elements];
   var placeHolders = [],
       els = [], 
       parentEl, el, i,
