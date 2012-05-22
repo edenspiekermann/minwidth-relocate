@@ -30,28 +30,32 @@
   
   var doc = win.document, 
       instances = [],
-      oldWidth = 0,
+      oldWidth =  getWindowWidth(),
       windowWidth = getWindowWidth();
   
   var resizeCallback = function() {
-    windowWidth = getWindowWidth();
     var i, instance;
+    windowWidth = getWindowWidth();
+    if (oldWidth == windowWidth) return;
+    instances.sort(function(a, b){ 
+      return oldWidth < windowWidth ? a.w > b.w : a.w < b.w;
+    });
     for (i = 0; i < instances.length; i++) {
       instance = instances[i];
       // Check Forward:
-      if (instance.old < instance.wdt &&
-          windowWidth >= instance.wdt &&
-          instance.fwd) {
-        instance.fwd();
+      if (oldWidth < instance.w &&
+          windowWidth >= instance.w &&
+          instance.f) {
+        instance.f(); // forward callback
       }
       // Check Backward:
-      if (instance.old >= instance.wdt && 
-          windowWidth < instance.wdt &&
-          instance.bck) {
-        instance.bck();
+      if (oldWidth >= instance.w && 
+          windowWidth < instance.w &&
+          instance.b) {
+        instance.b(); // backward callback
       }
-      instance.old = windowWidth;
     }
+    oldWidth = windowWidth;
   }
   
   if (win.addEventListener) {
@@ -69,14 +73,18 @@
   // * if a fourth paramater is passed as "true", the forward callback
   //   is initally not called, but the backward callback is called
   //   if the screenwidth is smaller than width.
-  win.minwidth = function(width, forwardCallback, backwardCallback) {
+  win.minwidth = function(width, forwardCallback, backwardCallback, desktopFirst) {
     instances.push({
-      wdt: width,
-      old: arguments[3] ? 1E9 : 0,
-      fwd: forwardCallback,
-      bck: backwardCallback
+      w: width,
+      f: forwardCallback,
+      b: backwardCallback
     });
-    resizeCallback();
+    if (windowWidth > width && !desktopFirst) {
+      forwardCallback();
+    }
+    if (windowWidth < width && desktopFirst) {
+      backwardCallback();
+    }
   } 
   
 })(this);
