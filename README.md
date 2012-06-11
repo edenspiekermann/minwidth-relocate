@@ -10,7 +10,7 @@ minwidth.js lets you bind to resize events on an advanced level. You provide a s
       doSomethingLikeLoadFacebook();
     });
 
-## relocate.js
+# relocate.js
 
 relocate.js lets you move elements in the DOM from their original place to another when you can't do that desktop design with CSS media queries.
 
@@ -21,6 +21,10 @@ For example move selected items into the sidebar which are mixed into the regula
 
 Note: IE8 and less don't have getElementsByClassName, you can use jQuery or this [getElementsByClassName polyfill](https://gist.github.com/2299607)
 
-## minification
+# Minification
 
     rm minwidth-relocate.min.js && cat *.js | uglifyjs -nc > minwidth-relocate.min.js
+
+# License
+
+The code is dual-licensed under the GNU General Public License Version 2 (GPLv2) and the MIT License.
