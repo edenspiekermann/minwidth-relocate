@@ -1,4 +1,13 @@
-// Move Elements in the DOM when a certain width is crossed
+/**
+ * Use relocat() to move HTML elements in the DOM 
+ * above a certain window width.
+ * 
+ * Copyright by Eike Send, Edenspiekermann AG
+ * 
+ * Licensed under the GPLv2 and the MIT license
+ *
+ */
+
 relocate = function(width, elements, destinationElement) {
   // ensure that we use an array-like argument, NodeList and HTMLCollection work as well
   if (elements.nodeName) elements = [elements];

@@ -1,21 +1,10 @@
 /**
- * Use like this to bind to certain min-widths:
+ * Use minwidth() to bind callbacks to changes of
+ * the window width or a minimum width at page load.
  * 
- * minwidth(
- *   480, 
- *   function() { 
- *     console.log("Forward Callback")
- *   }, 
- *   function() { 
- *     console.log("Backward Callback")
- *   }
- * );
+ * Copyright by Eike Send, Edenspiekermann AG
  * 
- * Copyright by Eike Send
- * http://eike.se/nd
- * 
- * Licensed under the MIT license:
- * http://www.opensource.org/licenses/mit-license.php
+ * Licensed under the GPLv2 and the MIT license
  *
  */
 
