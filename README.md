@@ -1,3 +1,7 @@
+Read the blog post which describes these tools with a nice demo:
+
+[http://edenspiekermann.com/en/blog/responsive-javascript-helpers](http://edenspiekermann.com/en/blog/responsive-javascript-helpers)
+
 # minwidth.js
 
 minwidth.js is a javascript library that helps you create fantastic mobile first websites. You provide a width at which your functions are called.
