@@ -14,7 +14,8 @@ relocate = function(width, elements, destinationElement) {
   var placeHolders = [],
       els = [], 
       parentEl, el, i,
-      l = elements.length;
+      l = elements.length,
+      old = arguments[3] ? 1E9 : 0;
   // first, create a non-live copy of the elements
   // this avoids nasty bugs when elements are removed and added again
   for (i = l-1; i >= 0; i--) {
@@ -39,5 +40,5 @@ relocate = function(width, elements, destinationElement) {
     }
   }
   // then create a object that operates on it:
-  minwidth(width, forwardFunction, backwardFunction);
+  minwidth(width, forwardFunction, backwardFunction, old);
 }
