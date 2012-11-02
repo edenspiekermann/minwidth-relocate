@@ -40,5 +40,9 @@ relocate = function(width, elements, destinationElement) {
     }
   }
   // then create a object that operates on it:
-  minwidth(width, forwardFunction, backwardFunction, old);
+  if(old) {
+    minwidth(width, backwardFunction, forwardFunction, old);
+  } else {  
+    minwidth(width, forwardFunction, backwardFunction);
+  }
 }
