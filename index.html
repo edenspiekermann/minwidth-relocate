@@ -101,7 +101,7 @@ minwidth(
   function(){
     document.getElementById("width640").style.color = "red";
     document.getElementById("width1024").style.color = "";
-  }
+  }, true
 );
 
 // Use the relocate function to move things around:
@@ -112,7 +112,8 @@ relocate(480, elements, sidebar);
 &lt;script>
     </pre>
   </div>
-  <script type="text/javascript" src="minwidth-relocate.min.js"></script>
+  <script type="text/javascript" src="minwidth.js"></script>
+  <script type="text/javascript" src="relocate.js"></script>
   <script type="text/javascript">
     minwidth(
       600,
@@ -123,7 +124,7 @@ relocate(480, elements, sidebar);
       function(){
         document.getElementById("width0").style.color = "red";
         document.getElementById("width640").style.color = "";
-      }
+      }, true
     );
     minwidth(
       1024,
@@ -134,7 +135,7 @@ relocate(480, elements, sidebar);
       function(){
         document.getElementById("width640").style.color = "red";
         document.getElementById("width1024").style.color = "";
-      }
+      }, "true"
     );
     minwidth(
       480,
@@ -148,7 +149,7 @@ relocate(480, elements, sidebar);
     // Use the relocate function to move things around:
     var elements = document.getElementsByClassName("movethis");
     var sidebar = document.getElementById("sidebar");
-    relocate(480, elements, sidebar);
+    relocate(1000, elements, sidebar, true);
   </script>
   <a href="http://github.com/eikes/minwidth-relocate"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
 </body>
