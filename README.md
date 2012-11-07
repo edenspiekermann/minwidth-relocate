@@ -10,20 +10,53 @@ Several use-cases have occured so many times that it made sense to sort this pro
 
 minwidth.js lets you bind to resize events on an advanced level. You provide a screen width and a callback function which is called whenever this width is crossed. You may provide another function which is called when the window is resized back below that width.
 
-    minwidth(600, function() {
-      doSomethingLikeLoadFacebook();
-    });
+```js
+minwidth(600, function() {
+  doSomethingLikeLoadFacebook();
+});
+```
+
+## interface
+
+```js
+minwidth(width, forwardCallback, backwardCallback, desktopFirst);
+```
+
+**width** specifies the breakpoint at which the callbacks should be fired.
+
+**forwardCallback** is the function that is called if the screen is wider than than the width.
+
+**backwardCallback** (optional) is the function that is called if the screen becomes smaller than than the width.
+
+**desktopFirst** (optional) is a boolean which lets you specify that you want to work in a desktop-first fashion. If true, the backwardCallback is then called if the screen is initially smaller than the width, the forwardCallback will only be called if the screen becomes wider than the width, in this case you can pass *false* as an argument to the forwardCallback.
 
 # relocate.js
 
 relocate.js lets you move elements in the DOM from their original place to another when you can't do that desktop design with CSS media queries.
 
-For example move selected items into the sidebar which are mixed into the regular page on mobile devices. Pass it a width and an Array, a NodeList or a HTMLCollection of HTML elements and a target element where to relocate the elements to.
+For example move selected items into the sidebar which are mixed into the regular page on mobile devices. 
 
-    var elements = document.getElementsByClassName("movethis");
-    relocate(480, elements, document.getElementById("sidebar"));
+```js
+var elements = document.getElementsByClassName("movethis");
+var sidebar = document.getElementById("sidebar");
+relocate(480, elements, sidebar);
+```
 
 Note: IE8 and less don't have getElementsByClassName, you can use jQuery or this [getElementsByClassName polyfill](https://gist.github.com/2299607)
+
+## interface
+
+```js
+relocate(width, elements, destinationElement, desktopFirst);
+```
+
+**width** specifies the breakpoint at which the elements should be relocated.
+
+**elements** can be a single HTMLElement or an Array of HTMLElements, a NodeList or a HTMLCollection. They will be relocated.
+
+**destinationElement** is the HTMLElement into which the elements will be relocated.
+
+**desktopFirst** (optional) is a boolean which lets you specify that you want to work in a desktop-first fashion. If true, the elements will only be relocated if the screen is initially smaller or becomes smaller than the given width.
 
 # Minification
 

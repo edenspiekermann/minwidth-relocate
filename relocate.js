@@ -8,7 +8,7 @@
  *
  */
 
-relocate = function(width, elements, destinationElement) {
+relocate = function(width, elements, destinationElement, desktopFirst) {
   // ensure that we use an array-like argument, NodeList and HTMLCollection work as well
   if (elements.nodeName) elements = [elements];
   var placeHolders = [],
@@ -39,5 +39,9 @@ relocate = function(width, elements, destinationElement) {
     }
   }
   // then create a object that operates on it:
-  minwidth(width, forwardFunction, backwardFunction);
+  if (!desktopFirst) {
+    minwidth(width, forwardFunction, backwardFunction);
+  } else {
+    minwidth(width, backwardFunction, forwardFunction, desktopFirst);
+  }
 }
