@@ -1,6 +1,6 @@
 Read the blog post which describes these tools with a nice demo:
 
-[http://edenspiekermann.com/en/blog/responsive-javascript-helpers](http://edenspiekermann.com/en/blog/responsive-javascript-helpers)
+[http://edenspiekermann.com/blog/posts/responsive-javascript-helpers](http://edenspiekermann.com/blog/posts/responsive-javascript-helpers)
 
 # minwidth.js
 
